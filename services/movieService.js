@@ -8,7 +8,7 @@ const createMovie = async (movieData) => {
     }
     const movie = new Movie(movieData);
     await movie.save();
-    return await Movie.findById(movie._id).populate('genre', 'name');
+    return await Movie.findById(movie._id).populate('genre', 'name').populate('createdBy', 'username'); // Populate the user
 };
 
 const updateMovie = async (id, movieData) => {
@@ -30,7 +30,7 @@ const listMovies = async (filters) => {
     if (filters.date) {
         query.releaseDate = { $gte: new Date(filters.date) };
     }
-    return await Movie.find(query).populate('genre');
+    return await Movie.find(query).populate('genre').populate('createdBy', 'username'); // Populate the user
 };
 
 export default { createMovie, updateMovie, listMovies };

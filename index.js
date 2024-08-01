@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import userRoutes from './routers/userRoutes.js';
 import genreRoutes from './routers/genreRoutes.js';
 import movieRoutes from './routers/movieRoutes.js';
+import reviewRoutes from './routers/reviewRoutes.js'
 
 const app = express();
 
@@ -25,3 +26,4 @@ mongoose.connect(MONGOURL).then(() => {
 app.use('/api', userRoutes);
 app.use('/api', genreRoutes);
 app.use('/api', movieRoutes);
+app.use('/api', reviewRoutes);
