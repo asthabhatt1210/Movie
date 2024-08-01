@@ -34,6 +34,8 @@
    git push origin main
 
 10. Create Genres and then push it.
-11. 
+11. Create the Movie files: Insert, update and display the movie
+12. Add review and fetch review
+13. 
     
 
