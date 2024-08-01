@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import userRoutes from './routers/userRoutes.js';
+import genreRoutes from './routers/genreRoutes.js';
 
 const app = express();
 
@@ -21,3 +22,4 @@ mongoose.connect(MONGOURL).then(() => {
 
 // Use the routes with `/api` prefix
 app.use('/api', userRoutes);
+app.use('/api', genreRoutes);
