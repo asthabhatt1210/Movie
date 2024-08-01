@@ -3,15 +3,15 @@
 1. Open any of the Code editor, here i am using vs code
 2. create a project in it and open the terminal
 3. Commands to write first in terminal:
-   npm start
-   npm init
-   npm i express
-   npm i dotenv
-   npm i mongoose
-   npm i body-parser
-   npm install –-save-dev nodemon
+->   npm start
+ ->  npm init
+ ->  npm i express
+ ->  npm i dotenv
+ ->  npm i mongoose
+ ->  npm i body-parser
+ ->  npm install –-save-dev nodemon
    
-4. Manually create .env file
+5. Manually create .env file
 4. create index.js file
 5. create 4 sub=folders name as controllers, services, models and routes
 6. i have firstly create the user and given the parameter as name,email and password
