@@ -1,11 +1,12 @@
 import express from 'express';
-import { createMovie, updateMovie, listMovies } from '../controllers/movieController.js';
-import attachUserId from '../middleware/userMiddleware.js';
+import movieController from "../controllers/movieController.js";
+import attachUserId from "../middleware/userMiddleware.js";
 
 const router = express.Router();
 
-router.post('/movies/create', attachUserId, createMovie);
-router.put('/movies/update/:id', attachUserId, updateMovie);
-router.get('/movies/list', listMovies);
+router.post('/movies/create', attachUserId, movieController.createMovie);
+router.put('/movies/update/:id', attachUserId, movieController.updateMovie);
+router.delete('/movies/delete/:id', attachUserId, movieController.deleteMovie); // Add this route
+router.get('/movies/list', movieController.listMovies);
 
 export default router;

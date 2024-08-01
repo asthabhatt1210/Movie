@@ -8,15 +8,32 @@ const createMovie = async (movieData) => {
     }
     const movie = new Movie(movieData);
     await movie.save();
-    return await Movie.findById(movie._id).populate('genre', 'name').populate('createdBy', 'username'); // Populate the user
+    return await Movie.findById(movie._id).populate('genre', 'name').populate('createdBy', 'username');
 };
 
-const updateMovie = async (id, movieData) => {
-    const movie = await Movie.findByIdAndUpdate(id, movieData, { new: true });
+const updateMovie = async (id, movieData, userId) => {
+    const movie = await Movie.findById(id);
     if (!movie) {
         throw new Error('Movie not found');
     }
-    return movie;
+    if (movie.createdBy.toString() !== userId) {
+        throw new Error('Unauthorized: Only the creator can update this movie');
+    }
+    Object.assign(movie, movieData);
+    await movie.save();
+    return await Movie.findById(id).populate('genre', 'name').populate('createdBy', 'username');
+};
+
+const deleteMovie = async (id, userId) => {
+    const movie = await Movie.findById(id);
+    if (!movie) {
+        throw new Error('Movie not found');
+    }
+    if (movie.createdBy.toString() !== userId) {
+        throw new Error('Unauthorized: Only the creator can delete this movie');
+    }
+    await Movie.findByIdAndDelete(id);
+    return { message: 'Movie deleted successfully' };
 };
 
 const listMovies = async (filters) => {
@@ -30,7 +47,7 @@ const listMovies = async (filters) => {
     if (filters.date) {
         query.releaseDate = { $gte: new Date(filters.date) };
     }
-    return await Movie.find(query).populate('genre').populate('createdBy', 'username'); // Populate the user
+    return await Movie.find(query).populate('genre').populate('createdBy', 'username');
 };
 
-export default { createMovie, updateMovie, listMovies };
+export default { createMovie, updateMovie, deleteMovie, listMovies };

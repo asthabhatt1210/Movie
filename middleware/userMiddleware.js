@@ -1,5 +1,5 @@
 const attachUserId = (req, res, next) => {
-    const userId = req.header('x-user-id');
+    const userId = req.header('user_id');
     if (!userId) {
         return res.status(400).json({ error: 'User ID header is missing' });
     }
